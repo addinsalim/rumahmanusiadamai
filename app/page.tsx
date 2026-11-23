@@ -354,17 +354,16 @@ export default async function HomePage() {
             </div>
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {/* Irjen Pol (Purn) Dra. Desy Andriani */}
-              <div className="overflow-hidden rounded-3xl border border-brand-green/30 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+              <div className="group overflow-hidden rounded-3xl border border-brand-green/30 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
                 <div>
-                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 via-slate-50 to-brand-mint/30 grid place-items-center border border-slate-100">
-                    <div className="text-center">
-                      <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-white shadow-xs text-2xl font-extrabold text-brand-green">
-                        D
-                      </div>
-                      <span className="mt-2 inline-block text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        Foto Pengurus
-                      </span>
-                    </div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-100">
+                    <Image
+                      src="/pengurus/desy-andriani.jpg"
+                      alt="Irjen Pol (Purn) Dra. Desy Andriani"
+                      fill
+                      className="object-cover object-top transition duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
                   </div>
                   <span className="inline-block rounded-full bg-brand-green px-3 py-1 text-[11px] font-bold text-white uppercase tracking-wide">
                     Ketua Pengawas
@@ -379,17 +378,16 @@ export default async function HomePage() {
               </div>
 
               {/* Brigjen TNI Heri Abriyadi */}
-              <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+              <div className="group overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
                 <div>
-                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 via-slate-50 to-brand-mint/30 grid place-items-center border border-slate-100">
-                    <div className="text-center">
-                      <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-white shadow-xs text-2xl font-extrabold text-brand-green">
-                        H
-                      </div>
-                      <span className="mt-2 inline-block text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        Foto Pengurus
-                      </span>
-                    </div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-100">
+                    <Image
+                      src="/pengurus/heri-abriyadi.jpg"
+                      alt="Brigjen TNI Heri Abriyadi, S.E., M.Han."
+                      fill
+                      className="object-cover object-top transition duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
                   </div>
                   <span className="inline-block rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-700 uppercase tracking-wide">
                     Anggota Pengawas
@@ -437,17 +435,16 @@ export default async function HomePage() {
             </div>
             <div className="mt-6 grid gap-6 sm:grid-cols-3">
               {/* Irsal, S.H. */}
-              <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+              <div className="group overflow-hidden rounded-3xl border border-brand-green/30 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
                 <div>
-                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 via-slate-50 to-brand-mint/30 grid place-items-center border border-slate-100">
-                    <div className="text-center">
-                      <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-white shadow-xs text-2xl font-extrabold text-brand-green">
-                        I
-                      </div>
-                      <span className="mt-2 inline-block text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        Foto Pengurus
-                      </span>
-                    </div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-100">
+                    <Image
+                      src="/pengurus/irsal.jpg"
+                      alt="Irsal, S.H."
+                      fill
+                      className="object-cover object-top transition duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
                   </div>
                   <span className="inline-block rounded-full bg-brand-green/10 px-3 py-1 text-[11px] font-bold text-brand-green uppercase tracking-wide">
                     Ketua
@@ -462,17 +459,16 @@ export default async function HomePage() {
               </div>
 
               {/* Poppy Jane Intania */}
-              <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+              <div className="group overflow-hidden rounded-3xl border border-brand-green/30 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
                 <div>
-                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 via-slate-50 to-brand-mint/30 grid place-items-center border border-slate-100">
-                    <div className="text-center">
-                      <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-white shadow-xs text-2xl font-extrabold text-brand-green">
-                        P
-                      </div>
-                      <span className="mt-2 inline-block text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        Foto Pengurus
-                      </span>
-                    </div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-100">
+                    <Image
+                      src="/pengurus/poppy-jane-intania.jpg"
+                      alt="Poppy Jane Intania, M.Kes., M.M."
+                      fill
+                      className="object-cover object-top transition duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
                   </div>
                   <span className="inline-block rounded-full bg-brand-green/10 px-3 py-1 text-[11px] font-bold text-brand-green uppercase tracking-wide">
                     Sekretaris
