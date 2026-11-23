@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { auth, signOut } from "@/auth";
 
 export async function Navbar() {
@@ -7,8 +8,14 @@ export async function Navbar() {
     <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="container-page flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-brand-green">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand-green text-white">R</span>
-          <span>Rumah Manusia Damai</span>
+          <Image
+            src="/logo.png"
+            alt="Yayasan Rumah Manusia Damai"
+            width={180}
+            height={44}
+            className="h-10 w-auto object-contain"
+            priority
+          />
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
           <Link href="/#tentang">Tentang Kami</Link>

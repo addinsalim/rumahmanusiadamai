@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -7,12 +8,15 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 pb-12 border-b border-slate-100">
           {/* Kolom 1: Profil & Tagline */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2.5 font-bold text-brand-green text-lg">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-green text-white font-extrabold text-xl shadow-xs">
-                R
-              </span>
-              <span>Rumah Manusia Damai</span>
-            </div>
+            <Link href="/" className="inline-block">
+              <Image
+                src="/logo.png"
+                alt="Yayasan Rumah Manusia Damai"
+                width={200}
+                height={50}
+                className="h-12 w-auto object-contain"
+              />
+            </Link>
             <p className="text-sm font-semibold text-brand-green italic">
               &ldquo;Menebar Kebaikan, Membangun Kemanusiaan, Mewujudkan Kedamaian.&rdquo;
             </p>

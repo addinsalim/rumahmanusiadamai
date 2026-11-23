@@ -493,6 +493,46 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
+
+          {/* Google Maps Lokasi Kantor Cabang */}
+          <div className="mt-10 overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 md:p-8 shadow-xs">
+            <div className="flex flex-col justify-between gap-4 border-b border-slate-100 pb-6 md:flex-row md:items-center">
+              <div>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-green/10 px-3 py-1 text-xs font-bold text-brand-green uppercase tracking-wide">
+                  <span>📍</span> Lokasi Kantor Cabang
+                </span>
+                <h3 className="mt-2 text-xl font-bold text-slate-900">
+                  Yayasan Rumah Manusia Damai (RMD)
+                </h3>
+                <p className="mt-1 text-sm text-slate-600">
+                  Jln. Madrasah 2 No. 28 B, RT 06 RW 10, Duren Sawit, Jakarta Timur 13440.
+                </p>
+              </div>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Jln.+Madrasah+2+No.+28+B+RT+06+RW+10+Duren+Sawit+Jakarta+Timur+13440"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-flex shrink-0 items-center gap-2 text-xs font-bold shadow-sm"
+              >
+                <span>Buka Rute di Google Maps</span>
+                <span>↗</span>
+              </a>
+            </div>
+
+            {/* Embed Map Interaktif */}
+            <div className="mt-6 h-[400px] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-inner">
+              <iframe
+                title="Peta Lokasi Yayasan Rumah Manusia Damai"
+                src="https://maps.google.com/maps?q=Jln.+Madrasah+2+No.+28+B+RT+06+RW+10+Duren+Sawit+Jakarta+Timur+13440&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={false}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
