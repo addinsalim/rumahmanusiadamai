@@ -386,6 +386,116 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Informasi Kontak & Rekening Resmi */}
+      <section id="kontak" className="bg-slate-50 py-20 border-t border-slate-200">
+        <div className="container-page">
+          <div className="max-w-2xl">
+            <span className="inline-block rounded-full bg-brand-lime/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-green">
+              Informasi Resmi & Layanan
+            </span>
+            <h2 className="mt-3 text-3xl font-extrabold text-slate-900 md:text-4xl">
+              Kantor & Rekening Yayasan
+            </h2>
+            <p className="mt-2 text-sm font-semibold text-brand-green italic">
+              &ldquo;Menebar Kebaikan, Membangun Kemanusiaan, Mewujudkan Kedamaian.&rdquo;
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {/* Card Kantor Cabang */}
+            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-xs flex flex-col justify-between">
+              <div>
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-mint text-2xl">
+                  📍
+                </div>
+                <h3 className="mt-5 text-base font-bold text-slate-900">Kantor Cabang (Branch Office)</h3>
+                <p className="mt-1 text-xs font-bold text-brand-green uppercase">
+                  Yayasan Rumah Manusia Damai (RMD)
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  Jln. Madrasah 2 No. 28 B, RT 06 RW 10, Duren Sawit, Jakarta Timur 13440.
+                </p>
+              </div>
+              <div className="mt-6 border-t border-slate-100 pt-4 text-xs text-slate-400">
+                Pusat operasional dan koordinasi kegiatan kemanusiaan.
+              </div>
+            </div>
+
+            {/* Card Rekening Bank */}
+            <div className="rounded-3xl border-2 border-brand-green bg-brand-mint/50 p-7 shadow-xs flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-green text-2xl text-white">
+                    🏦
+                  </div>
+                  <span className="rounded-full bg-brand-green px-3 py-1 text-xs font-bold text-white uppercase">
+                    Rekening Resmi
+                  </span>
+                </div>
+                <h3 className="mt-5 text-base font-bold text-slate-900">Bank Syariah Indonesia (BSI)</h3>
+                <div className="mt-3 rounded-2xl bg-white p-4 border border-brand-green/20">
+                  <p className="text-xs text-slate-500">Nomor Rekening Donasi:</p>
+                  <p className="mt-1 font-mono text-2xl font-black text-brand-green tracking-wider">
+                    7383733288
+                  </p>
+                  <p className="mt-2 text-xs font-semibold text-slate-700">
+                    a.n. Yayasan Rumah Manusia Damai
+                  </p>
+                </div>
+              </div>
+              <div className="mt-4 text-xs text-slate-500">
+                Menerima dana sosial, zakat, infak, sedekah, dan wakaf (ZISWAF).
+              </div>
+            </div>
+
+            {/* Card Layanan Telepon */}
+            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-xs flex flex-col justify-between">
+              <div>
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-mint text-2xl">
+                  📞
+                </div>
+                <h3 className="mt-5 text-base font-bold text-slate-900">Layanan Informasi & Konfirmasi</h3>
+                <p className="mt-1 text-xs text-slate-500">
+                  Hubungi kami untuk konfirmasi donasi, kemitraan, atau informasi program:
+                </p>
+                <div className="mt-4 space-y-2">
+                  <a
+                    href="https://wa.me/62811897319"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-green hover:bg-brand-mint transition"
+                  >
+                    <span>0811 897 319</span>
+                    <span className="text-xs font-bold text-brand-green">WhatsApp →</span>
+                  </a>
+                  <a
+                    href="https://wa.me/628111512174"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-green hover:bg-brand-mint transition"
+                  >
+                    <span>0811 1512 174</span>
+                    <span className="text-xs font-bold text-brand-green">WhatsApp →</span>
+                  </a>
+                  <a
+                    href="https://wa.me/6281389832223"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-green hover:bg-brand-mint transition"
+                  >
+                    <span>0813 8983 2223</span>
+                    <span className="text-xs font-bold text-brand-green">WhatsApp →</span>
+                  </a>
+                </div>
+              </div>
+              <div className="mt-4 text-xs text-slate-400">
+                Layanan aktif setiap hari kerja (08.00 - 17.00 WIB).
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Transparansi Banner */}
       <section id="transparansi" className="bg-brand-mint py-16 border-t border-slate-200">
         <div className="container-page flex flex-col items-start justify-between gap-5 md:flex-row md:items-center">

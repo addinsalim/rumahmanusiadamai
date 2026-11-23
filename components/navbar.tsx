@@ -14,6 +14,7 @@ export async function Navbar() {
           <Link href="/#tentang">Tentang Kami</Link>
           <Link href="/#program">Program</Link>
           <Link href="/#pengurus">Pengurus</Link>
+          <Link href="/#kontak">Kontak</Link>
           <Link href="/#transparansi">Transparansi</Link>
         </nav>
         <div className="flex items-center gap-3 text-sm">
