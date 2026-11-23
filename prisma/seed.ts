@@ -21,11 +21,10 @@ async function main() {
   }
 
   const pillarSeeds = [
-    { name: "Wakaf Al-Qur’an dan Pembinaan", slug: "wakaf-al-quran", description: "Wakaf Al-Qur’an dan pembinaan umat.", sortOrder: 1 },
-    { name: "Air Kemanusiaan", slug: "air-kemanusiaan", description: "Akses air bersih dan bantuan kemanusiaan.", sortOrder: 2 },
-    { name: "Pendidikan", slug: "pendidikan", description: "Dukungan pendidikan dan pengembangan generasi.", sortOrder: 3 },
-    { name: "Kesehatan", slug: "kesehatan", description: "Dukungan layanan dan kebutuhan kesehatan.", sortOrder: 4 },
-    { name: "Donasi Umum", slug: "donasi-umum", description: "Program donasi umum dengan kebijakan khusus per campaign.", sortOrder: 5 }
+    { name: "Wakaf Al-Qur'an", slug: "wakaf-al-quran", description: "Gerakan kebaikan untuk meningkatkan kecintaan dan pemahaman terhadap Al-Qur'an melalui penyediaan, distribusi, dan wakaf mushaf Al-Qur'an.", sortOrder: 1 },
+    { name: "Pendidikan", slug: "pendidikan", description: "Membangun generasi yang cerdas, berkarakter, berakhlak mulia, dan memiliki kesempatan yang sama untuk memperoleh pendidikan.", sortOrder: 2 },
+    { name: "Kesehatan", slug: "kesehatan", description: "Meningkatkan kualitas hidup masyarakat melalui akses pelayanan kesehatan yang terjangkau, merata, dan berorientasi pada pencegahan.", sortOrder: 3 },
+    { name: "Sosial Kemanusiaan", slug: "sosial-kemanusiaan", description: "Membangun solidaritas dan kepedulian sosial untuk membantu sesama manusia tanpa membedakan latar belakang, suku, maupun golongan.", sortOrder: 4 }
   ];
 
   for (const pillar of pillarSeeds) {
