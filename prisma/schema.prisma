@@ -1,0 +1,431 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum CampaignStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+  PAUSED
+  COMPLETED
+  ARCHIVED
+}
+
+enum DonationStatus {
+  PENDING_PAYMENT
+  PAID
+  EXPIRED
+  FAILED
+  CANCELLED
+  PARTIALLY_REFUNDED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  SETTLEMENT
+  CAPTURE
+  DENY
+  CANCEL
+  EXPIRE
+  FAILED
+  REFUND
+  PARTIAL_REFUND
+}
+
+enum AllocationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum AllocationDecision {
+  APPROVED
+  REJECTED
+}
+
+enum DisbursementStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum RefundStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+}
+
+enum ArticleStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+model User {
+  id             String    @id @default(uuid()) @db.Char(36)
+  name           String    @db.VarChar(150)
+  email          String    @unique @db.VarChar(191)
+  emailVerified  DateTime? @map("email_verified") @db.DateTime(3)
+  image          String?   @db.VarChar(500)
+  phone          String?   @db.VarChar(30)
+  passwordHash   String?   @map("password_hash") @db.VarChar(255)
+  isActive       Boolean   @default(true) @map("is_active")
+  createdAt      DateTime  @default(now()) @map("created_at") @db.DateTime(3)
+  updatedAt      DateTime  @updatedAt @map("updated_at") @db.DateTime(3)
+
+  userRoles                UserRole[]
+  accounts                 Account[]
+  sessions                 Session[]
+  donations                Donation[]
+  createdCampaigns         Campaign[] @relation("CampaignCreator")
+  articles                 Article[] @relation("ArticleAuthor")
+  campaignUpdates          CampaignUpdate[] @relation("CampaignUpdateAuthor")
+  requestedAllocations     Allocation[] @relation("AllocationRequester")
+  reviewedAllocationEvents AllocationApprovalEvent[] @relation("AllocationReviewer")
+  recordedDisbursements    Disbursement[] @relation("DisbursementRecorder")
+  auditLogs                AuditLog[] @relation("AuditActor")
+  donationStatusChanges    DonationStatusHistory[] @relation("DonationStatusActor")
+  approvedRefunds          Refund[] @relation("RefundApprover")
+  createdPolicies          CampaignFundPolicy[] @relation("PolicyCreator")
+
+  @@map("users")
+}
+
+model Role {
+  id          String   @id @default(uuid()) @db.Char(36)
+  code        String   @unique @db.VarChar(50)
+  name        String   @db.VarChar(100)
+  description String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at") @db.DateTime(3)
+  userRoles   UserRole[]
+  @@map("roles")
+}
+
+model UserRole {
+  id         String   @id @default(uuid()) @db.Char(36)
+  userId     String   @map("user_id") @db.Char(36)
+  roleId     String   @map("role_id") @db.Char(36)
+  assignedBy String?  @map("assigned_by") @db.Char(36)
+  createdAt  DateTime @default(now()) @map("created_at") @db.DateTime(3)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role       Role     @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  @@unique([userId, roleId])
+  @@index([roleId])
+  @@map("user_roles")
+}
+
+model Account {
+  id                String  @id @default(uuid()) @db.Char(36)
+  userId            String  @map("user_id") @db.Char(36)
+  type              String  @db.VarChar(50)
+  provider          String  @db.VarChar(100)
+  providerAccountId String  @map("provider_account_id") @db.VarChar(191)
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String? @db.VarChar(100)
+  scope             String? @db.Text
+  id_token          String? @db.Text
+  session_state     String? @db.VarChar(255)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(uuid()) @db.Char(36)
+  sessionToken String   @unique @map("session_token") @db.VarChar(191)
+  userId       String   @map("user_id") @db.Char(36)
+  expires      DateTime @db.DateTime(3)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String   @db.VarChar(191)
+  token      String   @unique @db.VarChar(191)
+  expires    DateTime @db.DateTime(3)
+  @@id([identifier, token])
+  @@map("verification_tokens")
+}
+
+model Pillar {
+  id          String   @id @default(uuid()) @db.Char(36)
+  name        String   @db.VarChar(150)
+  slug        String   @unique @db.VarChar(191)
+  description String?  @db.Text
+  imageUrl    String?  @map("image_url") @db.VarChar(500)
+  isActive    Boolean  @default(true) @map("is_active")
+  sortOrder   Int      @default(0) @map("sort_order")
+  createdAt   DateTime @default(now()) @map("created_at") @db.DateTime(3)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.DateTime(3)
+  campaigns   Campaign[]
+  @@map("pillars")
+}
+
+model Campaign {
+  id               String         @id @default(uuid()) @db.Char(36)
+  pillarId         String         @map("pillar_id") @db.Char(36)
+  title            String         @db.VarChar(200)
+  slug             String         @unique @db.VarChar(191)
+  shortDescription String         @map("short_description") @db.VarChar(500)
+  description      String         @db.LongText
+  targetAmount     BigInt         @map("target_amount")
+  startDate        DateTime?      @map("start_date") @db.DateTime(3)
+  endDate          DateTime?      @map("end_date") @db.DateTime(3)
+  status           CampaignStatus @default(DRAFT)
+  coverImage       String?        @map("cover_image") @db.VarChar(500)
+  createdBy        String         @map("created_by") @db.Char(36)
+  publishedAt      DateTime?      @map("published_at") @db.DateTime(3)
+  createdAt        DateTime       @default(now()) @map("created_at") @db.DateTime(3)
+  updatedAt        DateTime       @updatedAt @map("updated_at") @db.DateTime(3)
+  pillar           Pillar         @relation(fields: [pillarId], references: [id], onDelete: Restrict)
+  creator          User           @relation("CampaignCreator", fields: [createdBy], references: [id], onDelete: Restrict)
+  policies         CampaignFundPolicy[]
+  donations        Donation[]
+  updates          CampaignUpdate[]
+  allocations      Allocation[]
+  @@index([pillarId, status])
+  @@index([status, publishedAt])
+  @@map("campaigns")
+}
+
+model CampaignFundPolicy {
+  id                String   @id @default(uuid()) @db.Char(36)
+  campaignId        String   @map("campaign_id") @db.Char(36)
+  version           Int
+  policyTitle       String   @map("policy_title") @db.VarChar(200)
+  policyDescription String   @map("policy_description") @db.LongText
+  isActive          Boolean  @default(true) @map("is_active")
+  effectiveAt       DateTime @map("effective_at") @db.DateTime(3)
+  createdBy         String   @map("created_by") @db.Char(36)
+  createdAt         DateTime @default(now()) @map("created_at") @db.DateTime(3)
+  campaign          Campaign @relation(fields: [campaignId], references: [id], onDelete: Restrict)
+  creator           User     @relation("PolicyCreator", fields: [createdBy], references: [id], onDelete: Restrict)
+  donations         Donation[]
+  @@unique([campaignId, version])
+  @@index([campaignId, isActive])
+  @@map("campaign_fund_policies")
+}
+
+model CampaignUpdate {
+  id          String   @id @default(uuid()) @db.Char(36)
+  campaignId  String   @map("campaign_id") @db.Char(36)
+  authorId    String   @map("author_id") @db.Char(36)
+  title       String   @db.VarChar(200)
+  content     String   @db.LongText
+  imageUrl    String?  @map("image_url") @db.VarChar(500)
+  publishedAt DateTime? @map("published_at") @db.DateTime(3)
+  createdAt   DateTime @default(now()) @map("created_at") @db.DateTime(3)
+  campaign    Campaign @relation(fields: [campaignId], references: [id], onDelete: Restrict)
+  author      User     @relation("CampaignUpdateAuthor", fields: [authorId], references: [id], onDelete: Restrict)
+  @@index([campaignId, publishedAt])
+  @@map("campaign_updates")
+}
+
+model Donation {
+  id               String         @id @default(uuid()) @db.Char(36)
+  donationNumber   String         @unique @map("donation_number") @db.VarChar(50)
+  userId           String         @map("user_id") @db.Char(36)
+  campaignId       String         @map("campaign_id") @db.Char(36)
+  fundPolicyId     String         @map("fund_policy_id") @db.Char(36)
+  amount           BigInt
+  isAnonymous      Boolean        @default(true) @map("is_anonymous")
+  donorDisplayName String?        @map("donor_display_name") @db.VarChar(150)
+  status           DonationStatus @default(PENDING_PAYMENT)
+  paidAt           DateTime?      @map("paid_at") @db.DateTime(3)
+  createdAt        DateTime       @default(now()) @map("created_at") @db.DateTime(3)
+  updatedAt        DateTime       @updatedAt @map("updated_at") @db.DateTime(3)
+  user             User           @relation(fields: [userId], references: [id], onDelete: Restrict)
+  campaign         Campaign       @relation(fields: [campaignId], references: [id], onDelete: Restrict)
+  fundPolicy       CampaignFundPolicy @relation(fields: [fundPolicyId], references: [id], onDelete: Restrict)
+  paymentAttempts  PaymentAttempt[]
+  statusHistory    DonationStatusHistory[]
+  receipt          DonationReceipt?
+  refunds          Refund[]
+  @@index([userId, createdAt])
+  @@index([campaignId, status])
+  @@index([fundPolicyId])
+  @@index([status, paidAt])
+  @@map("donations")
+}
+
+model PaymentAttempt {
+  id                    String        @id @default(uuid()) @db.Char(36)
+  donationId            String        @map("donation_id") @db.Char(36)
+  provider              String        @db.VarChar(50)
+  providerOrderId       String        @unique @map("provider_order_id") @db.VarChar(100)
+  providerTransactionId String?       @map("provider_transaction_id") @db.VarChar(150)
+  paymentMethod         String?       @map("payment_method") @db.VarChar(80)
+  amount                BigInt
+  status                PaymentStatus @default(PENDING)
+  checkoutUrl           String?       @map("checkout_url") @db.VarChar(1000)
+  expiresAt             DateTime?     @map("expires_at") @db.DateTime(3)
+  paidAt                DateTime?     @map("paid_at") @db.DateTime(3)
+  createdAt             DateTime      @default(now()) @map("created_at") @db.DateTime(3)
+  updatedAt             DateTime      @updatedAt @map("updated_at") @db.DateTime(3)
+  donation              Donation      @relation(fields: [donationId], references: [id], onDelete: Restrict)
+  refunds               Refund[]
+  @@index([donationId, status])
+  @@index([providerTransactionId])
+  @@map("payment_attempts")
+}
+
+model WebhookEvent {
+  id               String   @id @default(uuid()) @db.Char(36)
+  provider         String   @db.VarChar(50)
+  eventKey         String   @map("event_key") @db.VarChar(191)
+  providerOrderId  String?  @map("provider_order_id") @db.VarChar(100)
+  payload          Json
+  signatureValid   Boolean  @default(false) @map("signature_valid")
+  processingStatus String   @default("RECEIVED") @map("processing_status") @db.VarChar(30)
+  processedAt      DateTime? @map("processed_at") @db.DateTime(3)
+  errorMessage     String?  @map("error_message") @db.Text
+  createdAt        DateTime @default(now()) @map("created_at") @db.DateTime(3)
+  @@unique([provider, eventKey])
+  @@index([providerOrderId])
+  @@index([processingStatus, createdAt])
+  @@map("webhook_events")
+}
+
+model DonationStatusHistory {
+  id          String         @id @default(uuid()) @db.Char(36)
+  donationId  String         @map("donation_id") @db.Char(36)
+  fromStatus  DonationStatus? @map("from_status")
+  toStatus    DonationStatus @map("to_status")
+  reason      String?        @db.Text
+  actorUserId String?        @map("actor_user_id") @db.Char(36)
+  createdAt   DateTime       @default(now()) @map("created_at") @db.DateTime(3)
+  donation    Donation       @relation(fields: [donationId], references: [id], onDelete: Restrict)
+  actor       User?          @relation("DonationStatusActor", fields: [actorUserId], references: [id], onDelete: Restrict)
+  @@index([donationId, createdAt])
+  @@map("donation_status_history")
+}
+
+model DonationReceipt {
+  id            String   @id @default(uuid()) @db.Char(36)
+  donationId    String   @unique @map("donation_id") @db.Char(36)
+  receiptNumber String   @unique @map("receipt_number") @db.VarChar(60)
+  issuedAt      DateTime @default(now()) @map("issued_at") @db.DateTime(3)
+  fileUrl       String?  @map("file_url") @db.VarChar(500)
+  createdAt     DateTime @default(now()) @map("created_at") @db.DateTime(3)
+  donation      Donation @relation(fields: [donationId], references: [id], onDelete: Restrict)
+  @@map("donation_receipts")
+}
+
+model Refund {
+  id               String      @id @default(uuid()) @db.Char(36)
+  donationId       String      @map("donation_id") @db.Char(36)
+  paymentAttemptId String?     @map("payment_attempt_id") @db.Char(36)
+  amount           BigInt
+  reason           String      @db.Text
+  status           RefundStatus @default(PENDING)
+  providerRefundId String?     @map("provider_refund_id") @db.VarChar(150)
+  approvedBy       String?     @map("approved_by") @db.Char(36)
+  createdAt        DateTime    @default(now()) @map("created_at") @db.DateTime(3)
+  updatedAt        DateTime    @updatedAt @map("updated_at") @db.DateTime(3)
+  donation         Donation    @relation(fields: [donationId], references: [id], onDelete: Restrict)
+  paymentAttempt  PaymentAttempt? @relation(fields: [paymentAttemptId], references: [id], onDelete: Restrict)
+  approver         User?       @relation("RefundApprover", fields: [approvedBy], references: [id], onDelete: Restrict)
+  @@index([donationId, status])
+  @@map("refunds")
+}
+
+model Allocation {
+  id               String           @id @default(uuid()) @db.Char(36)
+  allocationNumber String           @unique @map("allocation_number") @db.VarChar(50)
+  campaignId       String           @map("campaign_id") @db.Char(36)
+  amount           BigInt
+  purpose          String           @db.Text
+  status           AllocationStatus @default(PENDING)
+  requestedBy      String           @map("requested_by") @db.Char(36)
+  requestedAt      DateTime         @default(now()) @map("requested_at") @db.DateTime(3)
+  approvedAt       DateTime?        @map("approved_at") @db.DateTime(3)
+  rejectedAt       DateTime?        @map("rejected_at") @db.DateTime(3)
+  createdAt        DateTime         @default(now()) @map("created_at") @db.DateTime(3)
+  updatedAt        DateTime         @updatedAt @map("updated_at") @db.DateTime(3)
+  campaign         Campaign         @relation(fields: [campaignId], references: [id], onDelete: Restrict)
+  requester        User             @relation("AllocationRequester", fields: [requestedBy], references: [id], onDelete: Restrict)
+  approvalEvent    AllocationApprovalEvent?
+  disbursements    Disbursement[]
+  @@index([campaignId, status])
+  @@index([requestedBy, requestedAt])
+  @@map("allocations")
+}
+
+model AllocationApprovalEvent {
+  id           String             @id @default(uuid()) @db.Char(36)
+  allocationId String             @unique @map("allocation_id") @db.Char(36)
+  reviewerId   String             @map("reviewer_id") @db.Char(36)
+  decision     AllocationDecision
+  note         String?            @db.Text
+  createdAt    DateTime           @default(now()) @map("created_at") @db.DateTime(3)
+  allocation   Allocation         @relation(fields: [allocationId], references: [id], onDelete: Restrict)
+  reviewer     User               @relation("AllocationReviewer", fields: [reviewerId], references: [id], onDelete: Restrict)
+  @@index([reviewerId, createdAt])
+  @@map("allocation_approval_events")
+}
+
+model Disbursement {
+  id                   String             @id @default(uuid()) @db.Char(36)
+  allocationId         String             @map("allocation_id") @db.Char(36)
+  amount               BigInt
+  status               DisbursementStatus @default(PENDING)
+  disbursedAt          DateTime?          @map("disbursed_at") @db.DateTime(3)
+  recipientDescription String             @map("recipient_description") @db.Text
+  proofUrl             String?            @map("proof_url") @db.VarChar(500)
+  recordedBy           String             @map("recorded_by") @db.Char(36)
+  createdAt            DateTime           @default(now()) @map("created_at") @db.DateTime(3)
+  allocation           Allocation         @relation(fields: [allocationId], references: [id], onDelete: Restrict)
+  recorder             User               @relation("DisbursementRecorder", fields: [recordedBy], references: [id], onDelete: Restrict)
+  @@index([allocationId, status])
+  @@index([disbursedAt])
+  @@map("disbursements")
+}
+
+model Article {
+  id          String        @id @default(uuid()) @db.Char(36)
+  authorId    String        @map("author_id") @db.Char(36)
+  title       String        @db.VarChar(200)
+  slug        String        @unique @db.VarChar(191)
+  excerpt     String?       @db.VarChar(500)
+  content     String        @db.LongText
+  coverImage  String?       @map("cover_image") @db.VarChar(500)
+  status      ArticleStatus @default(DRAFT)
+  publishedAt DateTime?     @map("published_at") @db.DateTime(3)
+  createdAt   DateTime      @default(now()) @map("created_at") @db.DateTime(3)
+  updatedAt   DateTime      @updatedAt @map("updated_at") @db.DateTime(3)
+  author      User          @relation("ArticleAuthor", fields: [authorId], references: [id], onDelete: Restrict)
+  @@index([status, publishedAt])
+  @@map("articles")
+}
+
+model AuditLog {
+  id          String   @id @default(uuid()) @db.Char(36)
+  actorUserId String?  @map("actor_user_id") @db.Char(36)
+  action      String   @db.VarChar(100)
+  entityType  String   @map("entity_type") @db.VarChar(100)
+  entityId    String   @db.VarChar(100)
+  oldValues   Json?    @map("old_values")
+  newValues   Json?    @map("new_values")
+  ipAddress   String?  @map("ip_address") @db.VarChar(45)
+  userAgent   String?  @map("user_agent") @db.VarChar(500)
+  createdAt   DateTime @default(now()) @map("created_at") @db.DateTime(3)
+  actor       User?    @relation("AuditActor", fields: [actorUserId], references: [id], onDelete: Restrict)
+  @@index([entityType, entityId])
+  @@index([actorUserId, createdAt])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
