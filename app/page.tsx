@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { rupiah } from "@/lib/format";
 
@@ -263,40 +264,84 @@ export default async function HomePage() {
           </p>
         </div>
 
-        <div className="mt-14 space-y-12">
+        <div className="mt-14 space-y-14">
           {/* Dewan Pembina */}
           <div>
             <div className="flex items-center gap-3">
               <span className="h-2 w-2 rounded-full bg-brand-green"></span>
               <h3 className="text-lg font-bold text-slate-800 uppercase tracking-wider">Dewan Pembina</h3>
             </div>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="rounded-2xl border border-brand-green/30 bg-brand-mint/40 p-6">
-                <span className="rounded-full bg-brand-green px-3 py-1 text-[11px] font-bold text-white uppercase">
-                  Ketua Pembina
-                </span>
-                <h4 className="mt-4 font-bold text-slate-900 text-base">
-                  Dr. KH. Rusli Effendi, S.Pd.I., S.E., M.Si.
-                </h4>
-                <p className="mt-1 text-xs text-slate-500">Ketua Dewan Pembina Yayasan</p>
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {/* Dr. KH. Rusli Effendi */}
+              <div className="group overflow-hidden rounded-3xl border border-brand-green/30 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+                <div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-100">
+                    <Image
+                      src="/pengurus/rusli-effendi.jpg"
+                      alt="Dr. KH. Rusli Effendi, S.Pd.I., S.E., M.Si."
+                      fill
+                      className="object-cover object-top transition duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <span className="inline-block rounded-full bg-brand-green px-3 py-1 text-[11px] font-bold text-white uppercase tracking-wide">
+                    Ketua Pembina
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-900 text-base leading-snug">
+                    Dr. KH. Rusli Effendi, S.Pd.I., S.E., M.Si.
+                  </h4>
+                </div>
+                <p className="mt-3 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                  Ketua Dewan Pembina Yayasan
+                </p>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-600 uppercase">
-                  Anggota Pembina
-                </span>
-                <h4 className="mt-4 font-bold text-slate-900 text-base">
-                  Prof. Dr. Ir. Muhammad Nadratuzzaman Hosen, M.S., M.Sc., Ph.D.
-                </h4>
-                <p className="mt-1 text-xs text-slate-500">Anggota Dewan Pembina</p>
+
+              {/* Prof. Dr. Ir. Muhammad Nadratuzzaman Hosen */}
+              <div className="group overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+                <div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-100">
+                    <Image
+                      src="/pengurus/nadratuzzaman-hosen.jpg"
+                      alt="Prof. Dr. Ir. Muhammad Nadratuzzaman Hosen, M.S., M.Sc., Ph.D."
+                      fill
+                      className="object-cover object-top transition duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <span className="inline-block rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-700 uppercase tracking-wide">
+                    Anggota Pembina
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-900 text-base leading-snug">
+                    Prof. Dr. Ir. Muhammad Nadratuzzaman Hosen, M.S., M.Sc., Ph.D.
+                  </h4>
+                </div>
+                <p className="mt-3 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                  Anggota Dewan Pembina
+                </p>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-600 uppercase">
-                  Anggota Pembina
-                </span>
-                <h4 className="mt-4 font-bold text-slate-900 text-base">
-                  Prof. Dr. H. Waryono Abdul Ghofur, M.Ag.
-                </h4>
-                <p className="mt-1 text-xs text-slate-500">Anggota Dewan Pembina</p>
+
+              {/* Prof. Dr. H. Waryono Abdul Ghofur */}
+              <div className="group overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+                <div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-100">
+                    <Image
+                      src="/pengurus/waryono-abdul-ghofur.jpg"
+                      alt="Prof. Dr. H. Waryono Abdul Ghofur, M.Ag."
+                      fill
+                      className="object-cover object-top transition duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <span className="inline-block rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-700 uppercase tracking-wide">
+                    Anggota Pembina
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-900 text-base leading-snug">
+                    Prof. Dr. H. Waryono Abdul Ghofur, M.Ag.
+                  </h4>
+                </div>
+                <p className="mt-3 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                  Anggota Dewan Pembina
+                </p>
               </div>
             </div>
           </div>
@@ -307,33 +352,79 @@ export default async function HomePage() {
               <span className="h-2 w-2 rounded-full bg-brand-green"></span>
               <h3 className="text-lg font-bold text-slate-800 uppercase tracking-wider">Dewan Pengawas</h3>
             </div>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="rounded-2xl border border-brand-green/30 bg-brand-mint/40 p-6">
-                <span className="rounded-full bg-brand-green px-3 py-1 text-[11px] font-bold text-white uppercase">
-                  Ketua Pengawas
-                </span>
-                <h4 className="mt-4 font-bold text-slate-900 text-base">
-                  Irjen Pol (Purn) Dra. Desy Andriani
-                </h4>
-                <p className="mt-1 text-xs text-slate-500">Ketua Dewan Pengawas Yayasan</p>
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {/* Irjen Pol (Purn) Dra. Desy Andriani */}
+              <div className="overflow-hidden rounded-3xl border border-brand-green/30 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+                <div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 via-slate-50 to-brand-mint/30 grid place-items-center border border-slate-100">
+                    <div className="text-center">
+                      <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-white shadow-xs text-2xl font-extrabold text-brand-green">
+                        D
+                      </div>
+                      <span className="mt-2 inline-block text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        Foto Pengurus
+                      </span>
+                    </div>
+                  </div>
+                  <span className="inline-block rounded-full bg-brand-green px-3 py-1 text-[11px] font-bold text-white uppercase tracking-wide">
+                    Ketua Pengawas
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-900 text-base leading-snug">
+                    Irjen Pol (Purn) Dra. Desy Andriani
+                  </h4>
+                </div>
+                <p className="mt-3 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                  Ketua Dewan Pengawas Yayasan
+                </p>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-600 uppercase">
-                  Anggota Pengawas
-                </span>
-                <h4 className="mt-4 font-bold text-slate-900 text-base">
-                  Brigjen TNI Heri Abriyadi, S.E., M.Han.
-                </h4>
-                <p className="mt-1 text-xs text-slate-500">Anggota Dewan Pengawas</p>
+
+              {/* Brigjen TNI Heri Abriyadi */}
+              <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+                <div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 via-slate-50 to-brand-mint/30 grid place-items-center border border-slate-100">
+                    <div className="text-center">
+                      <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-white shadow-xs text-2xl font-extrabold text-brand-green">
+                        H
+                      </div>
+                      <span className="mt-2 inline-block text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        Foto Pengurus
+                      </span>
+                    </div>
+                  </div>
+                  <span className="inline-block rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-700 uppercase tracking-wide">
+                    Anggota Pengawas
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-900 text-base leading-snug">
+                    Brigjen TNI Heri Abriyadi, S.E., M.Han.
+                  </h4>
+                </div>
+                <p className="mt-3 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                  Anggota Dewan Pengawas
+                </p>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-600 uppercase">
-                  Anggota Pengawas
-                </span>
-                <h4 className="mt-4 font-bold text-slate-900 text-base">
-                  Betha A. Djardjis
-                </h4>
-                <p className="mt-1 text-xs text-slate-500">Anggota Dewan Pengawas</p>
+
+              {/* Betha A. Djardjis */}
+              <div className="group overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+                <div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-100">
+                    <Image
+                      src="/pengurus/betha-djardjis.jpg"
+                      alt="Betha A. Djardjis"
+                      fill
+                      className="object-cover object-top transition duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <span className="inline-block rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-700 uppercase tracking-wide">
+                    Anggota Pengawas
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-900 text-base leading-snug">
+                    Betha A. Djardjis
+                  </h4>
+                </div>
+                <p className="mt-3 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                  Anggota Dewan Pengawas
+                </p>
               </div>
             </div>
           </div>
@@ -344,42 +435,79 @@ export default async function HomePage() {
               <span className="h-2 w-2 rounded-full bg-brand-green"></span>
               <h3 className="text-lg font-bold text-slate-800 uppercase tracking-wider">Pengurus Harian</h3>
             </div>
-            <div className="mt-5 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs text-center">
-                <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-brand-mint text-xl font-extrabold text-brand-green">
-                  I
+            <div className="mt-6 grid gap-6 sm:grid-cols-3">
+              {/* Irsal, S.H. */}
+              <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+                <div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 via-slate-50 to-brand-mint/30 grid place-items-center border border-slate-100">
+                    <div className="text-center">
+                      <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-white shadow-xs text-2xl font-extrabold text-brand-green">
+                        I
+                      </div>
+                      <span className="mt-2 inline-block text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        Foto Pengurus
+                      </span>
+                    </div>
+                  </div>
+                  <span className="inline-block rounded-full bg-brand-green/10 px-3 py-1 text-[11px] font-bold text-brand-green uppercase tracking-wide">
+                    Ketua
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-900 text-base leading-snug">
+                    Irsal, S.H.
+                  </h4>
                 </div>
-                <span className="mt-4 inline-block rounded-full bg-brand-green/10 px-3 py-1 text-[11px] font-bold text-brand-green uppercase">
-                  Ketua
-                </span>
-                <h4 className="mt-3 font-bold text-slate-900 text-base">
-                  Irsal, S.H.
-                </h4>
-                <p className="mt-1 text-xs text-slate-500">Ketua Yayasan</p>
+                <p className="mt-3 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                  Ketua Yayasan
+                </p>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs text-center">
-                <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-brand-mint text-xl font-extrabold text-brand-green">
-                  P
+
+              {/* Poppy Jane Intania */}
+              <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+                <div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 via-slate-50 to-brand-mint/30 grid place-items-center border border-slate-100">
+                    <div className="text-center">
+                      <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-white shadow-xs text-2xl font-extrabold text-brand-green">
+                        P
+                      </div>
+                      <span className="mt-2 inline-block text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        Foto Pengurus
+                      </span>
+                    </div>
+                  </div>
+                  <span className="inline-block rounded-full bg-brand-green/10 px-3 py-1 text-[11px] font-bold text-brand-green uppercase tracking-wide">
+                    Sekretaris
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-900 text-base leading-snug">
+                    Poppy Jane Intania, M.Kes., M.M.
+                  </h4>
                 </div>
-                <span className="mt-4 inline-block rounded-full bg-brand-green/10 px-3 py-1 text-[11px] font-bold text-brand-green uppercase">
-                  Sekretaris
-                </span>
-                <h4 className="mt-3 font-bold text-slate-900 text-base">
-                  Poppy Jane Intania, M.Kes., M.M.
-                </h4>
-                <p className="mt-1 text-xs text-slate-500">Sekretaris Yayasan</p>
+                <p className="mt-3 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                  Sekretaris Yayasan
+                </p>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs text-center">
-                <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-brand-mint text-xl font-extrabold text-brand-green">
-                  D
+
+              {/* Dinul Hasan */}
+              <div className="group overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col justify-between">
+                <div>
+                  <div className="relative mb-4 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-100">
+                    <Image
+                      src="/pengurus/dinul-hasan.jpg"
+                      alt="Dinul Hasan"
+                      fill
+                      className="object-cover object-top transition duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <span className="inline-block rounded-full bg-brand-green/10 px-3 py-1 text-[11px] font-bold text-brand-green uppercase tracking-wide">
+                    Bendahara
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-900 text-base leading-snug">
+                    Dinul Hasan
+                  </h4>
                 </div>
-                <span className="mt-4 inline-block rounded-full bg-brand-green/10 px-3 py-1 text-[11px] font-bold text-brand-green uppercase">
-                  Bendahara
-                </span>
-                <h4 className="mt-3 font-bold text-slate-900 text-base">
-                  Dinul Hasan
-                </h4>
-                <p className="mt-1 text-xs text-slate-500">Bendahara Yayasan</p>
+                <p className="mt-3 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                  Bendahara Yayasan
+                </p>
               </div>
             </div>
           </div>
