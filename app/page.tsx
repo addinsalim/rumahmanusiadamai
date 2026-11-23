@@ -16,6 +16,7 @@ export default async function HomePage() {
   const programs = [
     {
       no: "1",
+      slug: "wakaf-al-quran",
       icon: "📖",
       title: "Wakaf Al-Qur'an",
       desc: "Gerakan kebaikan untuk meningkatkan kecintaan dan pemahaman terhadap Al-Qur'an melalui penyediaan, distribusi, dan wakaf mushaf Al-Qur'an bagi masyarakat yang membutuhkan.",
@@ -29,6 +30,7 @@ export default async function HomePage() {
     },
     {
       no: "2",
+      slug: "pendidikan",
       icon: "🎓",
       title: "Pendidikan",
       desc: "Membangun generasi yang cerdas, berkarakter, berakhlak mulia, dan memiliki kesempatan yang sama untuk memperoleh pendidikan yang berkualitas.",
@@ -43,6 +45,7 @@ export default async function HomePage() {
     },
     {
       no: "3",
+      slug: "kesehatan",
       icon: "🩺",
       title: "Kesehatan",
       desc: "Meningkatkan kualitas hidup masyarakat melalui akses pelayanan kesehatan yang terjangkau, merata, dan berorientasi pada pencegahan.",
@@ -57,6 +60,7 @@ export default async function HomePage() {
     },
     {
       no: "4",
+      slug: "sosial-kemanusiaan",
       icon: "🤝",
       title: "Sosial Kemanusiaan",
       desc: "Membangun solidaritas dan kepedulian sosial untuk membantu sesama manusia tanpa membedakan latar belakang, suku, maupun golongan.",
@@ -206,6 +210,16 @@ export default async function HomePage() {
                         </li>
                       ))}
                     </ul>
+                  </div>
+
+                  <div className="mt-8 border-t border-slate-100 pt-5">
+                    <Link
+                      href={`/program/${prog.slug}`}
+                      className="btn-primary w-full text-center text-xs flex items-center justify-center gap-2"
+                    >
+                      <span>Lihat Rincian & Dokumentasi Program</span>
+                      <span>→</span>
+                    </Link>
                   </div>
                 </div>
               </article>
