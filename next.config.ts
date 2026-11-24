@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
-const nextConfig: any = {
-  experimental: {
-    allowedDevOrigins: ["*.trycloudflare.com", "*.loca.lt", "localhost:3000"]
-  }
+const nextConfig: NextConfig = {
+  reactStrictMode: true,
 };
 
-export default nextConfig as NextConfig;
+export default nextConfig;
